@@ -6,7 +6,6 @@ use Interop\Container\ContainerInterface;
 use Laminas\Authentication\Result as AuthenticationResult;
 use Laminas\EventManager\EventInterface;
 use Laminas\ServiceManager\ServiceManager;
-use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Session\Container as SessionContainer;
 use ZfcUser\Entity\UserInterface;
 use ZfcUser\Mapper\UserInterface as UserMapperInterface;
@@ -94,12 +93,11 @@ class Db extends AbstractAdapter
             }
         }
 
-        $bcrypt = new Bcrypt();
-        $bcrypt->setCost($this->getOptions()->getPasswordCost());
-        if (!$bcrypt->verify($credential, $userObject->getPassword())) {
-            // Password does not match
+        $cost = $this->getOptions()->getPasswordCost();
+
+        if (!password_verify($credential, $userObject->getPassword())) {
             $e->setCode(AuthenticationResult::FAILURE_CREDENTIAL_INVALID)
-              ->setMessages(array('Supplied credential is invalid.'));
+            ->setMessages(['Supplied credential is invalid.']);
             $this->setSatisfied(false);
             return false;
         }
@@ -111,7 +109,7 @@ class Db extends AbstractAdapter
         // Success!
         $e->setIdentity($userObject->getId());
         // Update user's password hash if the cost parameter has changed
-        $this->updateUserPasswordHash($userObject, $credential, $bcrypt);
+        $this->updateUserPasswordHash($userObject, $credential, $cost);
         $this->setSatisfied(true);
         $storage = $this->getStorage()->read();
         $storage['identity'] = $e->getIdentity();
@@ -121,16 +119,30 @@ class Db extends AbstractAdapter
         return true;
     }
 
-    protected function updateUserPasswordHash(UserInterface $userObject, $password, Bcrypt $bcrypt)
-    {
-        $hash = explode('$', $userObject->getPassword());
-        if ($hash[2] === $bcrypt->getCost()) {
+    protected function updateUserPasswordHash(
+        UserInterface $userObject,
+        string $password,
+        int $cost
+    ) {
+        if (!password_needs_rehash(
+            $userObject->getPassword(),
+            PASSWORD_BCRYPT,
+            ['cost' => $cost]
+        )) {
             return;
         }
-        $userObject->setPassword($bcrypt->create($password));
+
+        $userObject->setPassword(
+            password_hash(
+                $password,
+                PASSWORD_BCRYPT,
+                ['cost' => $cost]
+            )
+        );
+
         $this->getMapper()->update($userObject);
-        return $this;
     }
+
 
     public function preProcessCredential($credential)
     {

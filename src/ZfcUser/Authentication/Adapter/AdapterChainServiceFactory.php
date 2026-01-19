@@ -66,7 +66,7 @@ class AdapterChainServiceFactory implements FactoryInterface
      * @return ModuleOptions $options
      * @throws OptionsNotFoundException If options tried to retrieve without being set but no SL was provided
      */
-    public function getOptions(ServiceLocatorInterface $serviceLocator = null)
+    public function getOptions(?ServiceLocatorInterface $serviceLocator = null)
     {
         if (!$this->options) {
             if (!$serviceLocator) {

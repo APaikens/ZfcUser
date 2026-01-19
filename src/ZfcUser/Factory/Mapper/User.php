@@ -10,7 +10,7 @@ use ZfcUser\Options\ModuleOptions;
 
 class User implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $serviceLocator, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $serviceLocator, $requestedName, ?array $options = null)
     {
         /** @var ModuleOptions $options */
         $options = $serviceLocator->get('zfcuser_module_options');

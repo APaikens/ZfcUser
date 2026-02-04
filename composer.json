@@ -28,7 +28,12 @@
         {
             "type": "vcs",
             "url": "https://github.com/scoumbourdis/laminas-db"
-        }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/APaikens/laminas-mvc-plugin-prg"
+        },
+        
     ],
     "require": {
         "php": "^8.0 || ^8.1 || ^8.2 || ^8.3 || ^8.4",
@@ -47,7 +52,7 @@
         "laminas/laminas-http": "^2.5",
         "laminas/laminas-mvc-plugin-flashmessenger": "^1.0",
         "laminas/laminas-i18n": "^2.7",
-        "laminas/laminas-mvc-plugin-prg": "dev-renovate/all-minor-patch",
+        "laminas/laminas-mvc-plugin-prg": "^1.9",
         "laminas/laminas-hydrator": "^4.2"
     },
     "require-dev": {

@@ -9,7 +9,7 @@ use ZfcUser\Controller;
 
 class ZfcUserAuthentication implements FactoryInterface
 {
-    public function __invoke(ContainerInterface $serviceLocator, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $serviceLocator, $requestedName, ?array $options = null)
     {
         $authService = $serviceLocator->get('zfcuser_auth_service');
         $authAdapter = $serviceLocator->get('ZfcUser\Authentication\Adapter\AdapterChain');

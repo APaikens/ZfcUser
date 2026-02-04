@@ -6,7 +6,6 @@ use Interop\Container\ContainerInterface;
 use Laminas\Authentication\AuthenticationService;
 use Laminas\Form\Form;
 use Laminas\ServiceManager\ServiceManager;
-use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Hydrator;
 use ZfcUser\EventManager\EventProvider;
 use ZfcUser\Mapper\UserInterface as UserMapperInterface;
@@ -77,9 +76,16 @@ class User extends EventProvider
         $user = $form->getData();
         /* @var $user \ZfcUser\Entity\UserInterface */
 
-        $bcrypt = new Bcrypt;
-        $bcrypt->setCost($this->getOptions()->getPasswordCost());
-        $user->setPassword($bcrypt->create($user->getPassword()));
+        $cost = $this->getOptions()->getPasswordCost();
+
+        $user->setPassword(
+            password_hash(
+                $user->getPassword(),
+                PASSWORD_BCRYPT,
+                ['cost' => $cost]
+            )
+        );
+
 
         if ($this->getOptions()->getEnableUsername()) {
             $user->setUsername($data['username']);
@@ -111,15 +117,19 @@ class User extends EventProvider
         $oldPass = $data['credential'];
         $newPass = $data['newCredential'];
 
-        $bcrypt = new Bcrypt;
-        $bcrypt->setCost($this->getOptions()->getPasswordCost());
+        $cost = $this->getOptions()->getPasswordCost();
 
-        if (!$bcrypt->verify($oldPass, $currentUser->getPassword())) {
+        if (!password_verify($oldPass, $currentUser->getPassword())) {
             return false;
         }
 
-        $pass = $bcrypt->create($newPass);
-        $currentUser->setPassword($pass);
+        $currentUser->setPassword(
+            password_hash(
+                $newPass,
+                PASSWORD_BCRYPT,
+                ['cost' => $cost]
+            )
+        );
 
         $this->getEventManager()->trigger(__FUNCTION__, $this, array('user' => $currentUser, 'data' => $data));
         $this->getUserMapper()->update($currentUser);
@@ -132,10 +142,9 @@ class User extends EventProvider
     {
         $currentUser = $this->getAuthService()->getIdentity();
 
-        $bcrypt = new Bcrypt;
-        $bcrypt->setCost($this->getOptions()->getPasswordCost());
+        $cost = $this->getOptions()->getPasswordCost();
 
-        if (!$bcrypt->verify($data['credential'], $currentUser->getPassword())) {
+        if (!password_verify($data['credential'], $currentUser->getPassword())) {
             return false;
         }
 

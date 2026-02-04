@@ -35,7 +35,7 @@ abstract class AbstractRecord extends AbstractValidator
      * Required options are:
      *  - key     Field to use, 'email' or 'username'
      */
-    public function __construct(array $options)
+    public function __construct(?array $options)
     {
         if (!array_key_exists('key', $options)) {
             throw new Exception\InvalidArgumentException('No key provided');

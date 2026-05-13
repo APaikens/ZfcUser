@@ -31,7 +31,7 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/APaikens/laminas-mvc-plugin-prg"
+            "url": "https://github.com/Schhneider/laminas-mvc-plugin-prg"
         }
     ],
     "require": {

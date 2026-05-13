@@ -49,7 +49,7 @@
         "laminas/laminas-view": "^2.8",
         "laminas/laminas-session": "^2.7",
         "laminas/laminas-http": "^2.5",
-        "laminas/laminas-mvc-plugin-flashmessenger": "renovate/all-minor-patch",
+        "laminas/laminas-mvc-plugin-flashmessenger": "dev-renovate/all-minor-patch",
         "laminas/laminas-i18n": "^2.7",
         "laminas/laminas-mvc-plugin-prg": "dev-renovate/all-minor-patch",
         "laminas/laminas-hydrator": "^4.18"

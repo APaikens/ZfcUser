@@ -48,7 +48,7 @@
         "laminas/laminas-mvc": "dev-I-51993",
         "laminas/laminas-servicemanager": "^4.5.1",
         "laminas/laminas-stdlib": "^3.0",
-        "laminas/laminas-validator": "^2.8",
+        "laminas/laminas-validator": "dev-I-51993",
         "laminas/laminas-db": "dev-I-51993",
         "laminas/laminas-view": "dev-I-51993",
         "laminas/laminas-session": "dev-I-51993",

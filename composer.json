@@ -41,7 +41,7 @@
     "require": {
         "php": "^8.0 || ^8.1 || ^8.2 || ^8.3 || ^8.4 || ^8.5",
         "laminas/laminas-authentication": "^2.16",
-        "laminas/laminas-form": "dev-I-51993",
+        "laminas/laminas-form": "^3.22",
         "laminas/laminas-inputfilter": "dev-I-51993",
         "laminas/laminas-loader": "^2.9",
         "laminas/laminas-modulemanager": "^2.16",

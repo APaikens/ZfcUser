@@ -45,7 +45,7 @@
         "laminas/laminas-inputfilter": "^2.32",
         "laminas/laminas-loader": "^2.9",
         "laminas/laminas-modulemanager": "^2.16",
-        "laminas/laminas-mvc": "dev-I-51993",
+        "laminas/laminas-mvc": "dev-renovate/all-minor-patch",
         "laminas/laminas-servicemanager": "^3.24",
         "laminas/laminas-stdlib": "^3.0",
         "laminas/laminas-validator": "^2.65",

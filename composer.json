@@ -50,7 +50,7 @@
         "laminas/laminas-stdlib": "^3.0",
         "laminas/laminas-validator": "^2.65",
         "laminas/laminas-db": "dev-I-51993",
-        "laminas/laminas-view": "dev-I-51993",
+        "laminas/laminas-view": "^2.44.0",
         "laminas/laminas-session": "dev-I-51993",
         "laminas/laminas-http": "^2.5",
         "laminas/laminas-mvc-plugin-flashmessenger": "dev-I-51993",

@@ -45,7 +45,7 @@
         "laminas/laminas-servicemanager": "^3.24",
         "laminas/laminas-stdlib": "^3.0",
         "laminas/laminas-validator": "^2.65",
-        "laminas/laminas-db": "dev-I-51993",
+        "laminas/laminas-db": "^2.20",
         "laminas/laminas-view": "^2.44.0",
         "laminas/laminas-session": "^2.27.0",
         "laminas/laminas-http": "^2.5",

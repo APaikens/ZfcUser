@@ -27,15 +27,11 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/Schhneider/laminas-db"
+            "url": "https://github.com/APaikens/laminas-mvc-plugin-prg"
         },
         {
             "type": "vcs",
-            "url": "https://github.com/Schhneider/laminas-mvc-plugin-prg"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/Schhneider/laminas-mvc-plugin-flashmessenger"
+            "url": "https://github.com/APaikens/laminas-mvc-plugin-flashmessenger"
         }
     ],
     "require": {
@@ -45,7 +41,7 @@
         "laminas/laminas-inputfilter": "^2.32",
         "laminas/laminas-loader": "^2.9",
         "laminas/laminas-modulemanager": "^2.16",
-        "laminas/laminas-mvc": "dev-renovate/all-minor-patch",
+        "laminas/laminas-mvc": "^3.10",
         "laminas/laminas-servicemanager": "^3.24",
         "laminas/laminas-stdlib": "^3.0",
         "laminas/laminas-validator": "^2.65",
@@ -53,9 +49,9 @@
         "laminas/laminas-view": "^2.44.0",
         "laminas/laminas-session": "^2.27.0",
         "laminas/laminas-http": "^2.5",
-        "laminas/laminas-mvc-plugin-flashmessenger": "dev-I-51993",
+        "laminas/laminas-mvc-plugin-flashmessenger": "^1.13",
         "laminas/laminas-i18n": "^2.7",
-        "laminas/laminas-mvc-plugin-prg": "dev-I-51993",
+        "laminas/laminas-mvc-plugin-prg": "^1.10.0",
         "laminas/laminas-hydrator": "^4.18"
     },
     "require-dev": {

@@ -27,10 +27,6 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/scoumbourdis/laminas-db"
-        },
-        {
-            "type": "vcs",
             "url": "https://github.com/APaikens/laminas-mvc-plugin-prg"
         }
     ],
@@ -45,7 +41,7 @@
         "laminas/laminas-servicemanager": "^3.0",
         "laminas/laminas-stdlib": "^3.0",
         "laminas/laminas-validator": "^2.8",
-        "scoumbourdis/laminas-db": "^2.21",
+        "laminas/laminas-db": "^2.21",
         "laminas/laminas-view": "^2.8",
         "laminas/laminas-session": "^2.7",
         "laminas/laminas-http": "^2.5",

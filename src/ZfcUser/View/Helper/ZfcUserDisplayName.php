@@ -21,7 +21,7 @@ class ZfcUserDisplayName extends AbstractHelper
      * @throws \ZfcUser\Exception\DomainException
      * @return String
      */
-    public function __invoke(User $user = null)
+    public function __invoke(?User $user = null)
     {
         if (null === $user) {
             if ($this->getAuthService()->hasIdentity()) {

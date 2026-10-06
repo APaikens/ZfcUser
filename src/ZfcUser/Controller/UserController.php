@@ -83,7 +83,7 @@ class UserController extends AbstractActionController
     public function indexAction()
     {
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
-            return $this->redirect()->toRoute(static::ROUTE_LOGIN);
+            return $this->redirect()->toRoute(static::ROUTE_LOGIN, [], [], true);
         }
         return new ViewModel();
     }
@@ -94,7 +94,7 @@ class UserController extends AbstractActionController
     public function loginAction()
     {
         if ($this->zfcUserAuthentication()->hasIdentity()) {
-            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute(), [], [], true);
         }
 
         $request = $this->getRequest();
@@ -118,7 +118,7 @@ class UserController extends AbstractActionController
 
         if (!$form->isValid()) {
             $this->flashMessenger()->setNamespace('zfcuser-login-form')->addMessage($this->failedLoginMessage);
-            return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN).($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+            return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN, [], [], true).($redirect ? '?redirect='. rawurlencode($redirect) : ''));
         }
 
         // clear adapters
@@ -148,7 +148,7 @@ class UserController extends AbstractActionController
     public function authenticateAction()
     {
         if ($this->zfcUserAuthentication()->hasIdentity()) {
-            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute(), [], [], true);
         }
 
         $adapter = $this->zfcUserAuthentication()->getAuthAdapter();
@@ -167,7 +167,7 @@ class UserController extends AbstractActionController
             $this->flashMessenger()->setNamespace('zfcuser-login-form')->addMessage($this->failedLoginMessage);
             $adapter->resetAdapters();
             return $this->redirect()->toUrl(
-                $this->url()->fromRoute(static::ROUTE_LOGIN) .
+                $this->url()->fromRoute(static::ROUTE_LOGIN, [], [], true) .
                 ($redirect ? '?redirect='. rawurlencode($redirect) : '')
             );
         }
@@ -185,7 +185,7 @@ class UserController extends AbstractActionController
         // if the user is logged in, we don't need to register
         if ($this->zfcUserAuthentication()->hasIdentity()) {
             // redirect to the login redirect route
-            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute(), [], [], true);
         }
         // if registration is disabled
         if (!$this->getOptions()->getEnableRegistration()) {
@@ -202,7 +202,7 @@ class UserController extends AbstractActionController
             $redirect = false;
         }
 
-        $redirectUrl = $this->url()->fromRoute(static::ROUTE_REGISTER)
+        $redirectUrl = $this->url()->fromRoute(static::ROUTE_REGISTER, [], [], true)
             . ($redirect ? '?redirect=' . rawurlencode($redirect) : '');
         $prg = $this->prg($redirectUrl, true);
 
@@ -242,7 +242,7 @@ class UserController extends AbstractActionController
         }
 
         // TODO: Add the redirect parameter here...
-        return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
+        return $this->redirect()->toUrl($this->url()->fromRoute(static::ROUTE_LOGIN, [], [], true) . ($redirect ? '?redirect='. rawurlencode($redirect) : ''));
     }
 
     /**
@@ -253,11 +253,11 @@ class UserController extends AbstractActionController
         // if the user isn't logged in, we can't change password
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
             // redirect to the login redirect route
-            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute(), [], [], true);
         }
 
         $form = $this->getChangePasswordForm();
-        $prg = $this->prg(static::ROUTE_CHANGEPASSWD);
+        $prg = $this->prg();
         
         //for redirect - just use default namespace
         $defaultNamespace = $this->flashMessenger()->getNamespace();
@@ -298,7 +298,7 @@ class UserController extends AbstractActionController
         //use default namespace for flash messages
         $this->flashMessenger()->setNamespace($defaultNamespace);
         $this->flashMessenger()->addMessage('Password changed successfully.');
-        return $this->redirect()->toRoute('zfcuser/profile');
+        return $this->redirect()->toRoute('zfcuser/profile', [], [], true);
     }
 
     public function changeEmailAction()
@@ -306,7 +306,7 @@ class UserController extends AbstractActionController
         // if the user isn't logged in, we can't change email
         if (!$this->zfcUserAuthentication()->hasIdentity()) {
             // redirect to the login redirect route
-            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute());
+            return $this->redirect()->toRoute($this->getOptions()->getLoginRedirectRoute(), [], [], true);
         }
 
         $form = $this->getChangeEmailForm();
@@ -320,7 +320,7 @@ class UserController extends AbstractActionController
             $status = null;
         }
 
-        $prg = $this->prg(static::ROUTE_CHANGEEMAIL);
+        $prg = $this->prg();
         if ($prg instanceof Response) {
             return $prg;
         } elseif ($prg === false) {
@@ -350,7 +350,7 @@ class UserController extends AbstractActionController
         }
 
         $this->flashMessenger()->setNamespace('change-email')->addMessage(true);
-        return $this->redirect()->toRoute(static::ROUTE_CHANGEEMAIL);
+        return $this->redirect()->toRoute(static::ROUTE_CHANGEEMAIL, [], [], true);
     }
 
     /**
